@@ -1,5 +1,16 @@
+using Business.Abstract;
+using Business.Concrete;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Utilities.IoC;
+using Core.Utilities.Security.Encryption;
+using Core.Utilities.Security.Jwt;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -8,14 +19,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Core.Utilities.Security.Encryption;
-using Core.Utilities.Security.Jwt;
-using Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace WebAPI
 {
@@ -48,10 +55,13 @@ namespace WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
+            services.AddDependencyResolvers(new ICoreModule[] {
+               new CoreModule()
             });
+            services.AddApplicationInsightsTelemetry();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,9 +69,10 @@ namespace WebAPI
         {
             if (env.IsDevelopment())
             {
+
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
+                
+               
             }
 
 
@@ -78,6 +89,8 @@ namespace WebAPI
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseDeveloperExceptionPage();
 
             app.UseEndpoints(endpoints =>
             {

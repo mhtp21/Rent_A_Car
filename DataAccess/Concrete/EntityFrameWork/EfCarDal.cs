@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                              on car.ColorId equals color.Id
                              join brand in context.Brands
                              on car.BrandId equals brand.BrandId
-                             select new CarDetailDto { CarName = car.Name, ColorName = color.Name, DailyPrice = car.DailyPrice, BrandName = brand.Name };
+                             select new CarDetailDto { CarId = car.Id, ColorName = color.Name, DailyPrice = car.DailyPrice, BrandName = brand.Name };
                 return result.ToList();
             }
         }
@@ -37,7 +37,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  join brand in context.Brands
                                  on car.BrandId equals brand.BrandId
                                  where car.BrandId == brandId
-                                 select new CarDetailDto { CarName = car.Name, ColorName = color.Name, DailyPrice = car.DailyPrice, BrandName = brand.Name };
+                                 select new CarDetailDto { CarId = car.Id, ColorName = color.Name, DailyPrice = car.DailyPrice, BrandName = brand.Name };
                     return result.ToList();
                 }
         }
@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                              where car.ColorId == colorId
                              join brand in context.Brands
                              on car.BrandId equals brand.BrandId
-                             select new CarDetailDto { CarName = car.Name, ColorName = color.Name, DailyPrice = car.DailyPrice, BrandName = brand.Name };
+                             select new CarDetailDto { CarId = car.Id, ColorName = color.Name, DailyPrice = car.DailyPrice, BrandName = brand.Name };
                 return result.ToList();
             }
         }

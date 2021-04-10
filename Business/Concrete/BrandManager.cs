@@ -11,6 +11,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
 using System.Text;
+using Business.BusinessAspect.Autofac;
 
 namespace Business.Concrete
 {
@@ -22,7 +23,8 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
-        
+
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
@@ -36,6 +38,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.BrandAdded);
         }
 
+        [SecuredOperation("admin")]
         public IResult Delete(Brand brand)
         {
             IResult result = CheckIfBrandExists(brand.BrandId);
@@ -63,6 +66,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == id));
         }
 
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Update(Brand brand)
         {

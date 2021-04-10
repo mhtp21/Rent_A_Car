@@ -14,6 +14,11 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using FluentValidation;
+using Business.BusinessAspect.Autofac;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
+
 namespace Business.Concrete
 {
     public class CarManager : ICarService
@@ -28,7 +33,9 @@ namespace Business.Concrete
             _colorService = colorService;
             _brandService = brandService;
         }
+        [SecuredOperation("car.add")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             IResult result = BusinesRules.Run(CheckIdBrandExists(car.BrandId), CheckIfColorExists(car.ColorId));
@@ -48,6 +55,8 @@ namespace Business.Concrete
             
         }
 
+        [CacheAspect(duration: 10)]
+        [PerformanceAspect(1)]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_cardal.GetAll(), Messages.CarsListed);
@@ -106,6 +115,13 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.CarNotFound);
             }
             _cardal.Update(car);
+            return new SuccessResult(Messages.CarUpdated);
+        }
+        [TransactionScopeAspect]
+        public IResult TransactionalOperation(Car car)
+        {
+            _cardal.Update(car);
+            _cardal.Add(car);
             return new SuccessResult(Messages.CarUpdated);
         }
 
