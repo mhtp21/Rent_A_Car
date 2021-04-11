@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
@@ -24,10 +19,17 @@ namespace WebAPI.Controllers
         public IActionResult Login(UserForLoginDto userForLoginDto)
         {
             var userToLogin = _authService.Login(userForLoginDto);
-            if (!userToLogin.Success) { return BadRequest(userToLogin.Message); }
+            if (!userToLogin.Success)
+            {
+                return BadRequest(userToLogin.Message);
+            }
 
             var result = _authService.CreateAccessToken(userToLogin.Data);
-            if (result.Success) { return Ok(result.Data); }
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+
             return BadRequest(result.Message);
         }
 
@@ -35,10 +37,16 @@ namespace WebAPI.Controllers
         public IActionResult Register(UserForRegisterDto userForRegisterDto)
         {
             var registerResult = _authService.Register(userForRegisterDto);
-            if (!registerResult.Success) { return BadRequest(registerResult); }
+            if (!registerResult.Success)
+            {
+                return BadRequest(registerResult);
+            }
 
             var result = _authService.CreateAccessToken(registerResult.Data);
-            if (!result.Success) { return BadRequest(result); }
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
             return Ok(result);
         }
     }

@@ -1,7 +1,10 @@
 {
   "dependencies": {
     "appInsights1": {
-      "type": "appInsights"
+      "type": "appInsights",
+      "connectionId": "",
+      "suggestion": "true",
+      "ignored": "true"
     }
   }
 }

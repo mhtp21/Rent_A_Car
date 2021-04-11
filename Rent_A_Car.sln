@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RentACar", "..\RentACar\RentACar.sqlproj", "{594136E7-5CD4-4FBA-B0E1-443FB94F128D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{91932101-FFE7-49D3-843B-CB3857828AF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{F44380E9-C55D-4D30-93F0-6CABD31CE8AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,10 @@ Global
 		{594136E7-5CD4-4FBA-B0E1-443FB94F128D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{594136E7-5CD4-4FBA-B0E1-443FB94F128D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{594136E7-5CD4-4FBA-B0E1-443FB94F128D}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{91932101-FFE7-49D3-843B-CB3857828AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91932101-FFE7-49D3-843B-CB3857828AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91932101-FFE7-49D3-843B-CB3857828AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91932101-FFE7-49D3-843B-CB3857828AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F44380E9-C55D-4D30-93F0-6CABD31CE8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F44380E9-C55D-4D30-93F0-6CABD31CE8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F44380E9-C55D-4D30-93F0-6CABD31CE8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F44380E9-C55D-4D30-93F0-6CABD31CE8AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
